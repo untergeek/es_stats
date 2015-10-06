@@ -1,4 +1,4 @@
-# Contributing to ElasticStats-py
+# Contributing to es_stats
 
 All contributions are welcome: ideas, patches, documentation, bug reports,
 complaints, etc!
@@ -10,18 +10,18 @@ That said, some basic guidelines, which you are free to ignore :)
 
 ## Have an Idea or Feature Request?
 
-* File a ticket on [github](https://github.com/untergeek/ElasticStats-py/issues)
+* File a ticket on [github](https://github.com/untergeek/es_stats/issues)
 
 ## Something Not Working? Found a Bug?
 
 If you think you found a bug, it probably is a bug.
 
-* File it on [github](https://github.com/untergeek/ElasticStats-py/issues)
+* File it on [github](https://github.com/untergeek/es_stats/issues)
 
 # Contributing Documentation and Code Changes
 
 If you have a bugfix or new feature that you would like to contribute to
-ElasticStats-py, and you think it will take more than a few minutes to produce
+es_stats, and you think it will take more than a few minutes to produce
 the fix (ie; write code), it is worth discussing the change with other users and
-developers first! You can reach us via [github](https://github.com/untergeek/ElasticStats-py/issues),
+developers first! You can reach us via [github](https://github.com/untergeek/es_stats/issues),
 or via IRC (#untergeek on freenode irc)

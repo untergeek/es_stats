@@ -8,7 +8,7 @@ def fread(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 def get_version():
-    VERSIONFILE="ElasticStats/_version.py"
+    VERSIONFILE="es_stats/_version.py"
     verstrline = fread(VERSIONFILE).strip()
     vsre = r"^__version__ = ['\"]([^'\"]*)['\"]"
     mo = re.search(vsre, verstrline, re.M)
@@ -16,7 +16,7 @@ def get_version():
         VERSION = mo.group(1)
     else:
         raise RuntimeError("Unable to find version string in %s." % (VERSIONFILE,))
-    build_number = os.environ.get('ELASTICSTATS_BUILD_NUMBER', None)
+    build_number = os.environ.get('ESSTATS_BUILD_NUMBER', None)
     if build_number:
         return VERSION + "b{}".format(build_number)
     return VERSION
@@ -27,18 +27,18 @@ def get_install_requires():
     return res
 
 setup(
-    name = "ElasticStats",
+    name = "es_stats",
     version = get_version(),
     author = "Aaron Mildenstein",
     author_email = "aaron@mildensteins.com",
     description = "Collect stats from Elasticsearch",
     long_description=fread('README.rst'),
-    url = "http://github.com/untergeek/ElasticStats-py",
-    download_url = "https://github.com/untergeek/ElasticStats-py/tarball/v" + get_version(),
+    url = "http://github.com/untergeek/es_stats",
+    download_url = "https://github.com/untergeek/es_stats/tarball/v" + get_version(),
     license = "Apache License, Version 2.0",
     install_requires = get_install_requires(),
     keywords = "elasticsearch stats",
-    packages = ["ElasticStats"],
+    packages = ["es_stats"],
     include_package_data=True,
     classifiers=[
         "Intended Audience :: Developers",
