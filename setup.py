@@ -38,7 +38,7 @@ setup(
     license = "Apache License, Version 2.0",
     install_requires = get_install_requires(),
     keywords = "elasticsearch stats",
-    packages = ["ElasticStats", "ElasticStats.cluster", "ElasticStats.node"],
+    packages = ["ElasticStats"],
     include_package_data=True,
     classifiers=[
         "Intended Audience :: Developers",
