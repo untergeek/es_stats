@@ -3,6 +3,18 @@
 Changelog
 =========
 
+0.0.4 (6 October 2015)
+----------------------
+
+**New**
+
+  * Have ClusterState master_node calls return the node name, rather than the nodeid
+
+**Bug Fixes**
+
+  * Found out why Elasticsearch-py 1.7.0 was buggy.  It doesn't affect this module at all.
+    Fixed dependencies to allow 1.7.0 to be used.
+
 0.0.3 (6 October 2015)
 ----------------------
 

@@ -22,7 +22,7 @@ def get_version():
     return VERSION
 
 def get_install_requires():
-    res = ['elasticsearch>=1.3.0,<1.7.0' ]
+    res = ['elasticsearch>=1.6.0' ]
     res.append('dotmap>=1.1.2')
     return res
 

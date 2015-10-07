@@ -35,6 +35,10 @@ class ClusterState():
 
     def get(self, key):
         """Return value for specific key"""
+        # Remap the key to show master_node name, rather than nodeid
+        if key == "master_node":
+            nodeid = get_value(self.state, key)
+            key = "nodes." + nodeid + ".name"
         return get_value(self.state, key)
 
 class NodeStats():
