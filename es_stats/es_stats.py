@@ -13,7 +13,7 @@ class ClusterHealth():
         self.health = DotMap(client.cluster.health())
         self.health["status"] = status_map(self.health["status"])
 
-    def get(self, key):
+    def get(self, key, name=None):
         """Return value for specific key"""
         return get_value(self.health, key)
 
@@ -23,7 +23,7 @@ class ClusterStats():
     def __init__(self, client):
         self.stats = DotMap(client.cluster.stats())
 
-    def get(self, key):
+    def get(self, key, name=None):
         """Return value for specific key"""
         return get_value(self.stats, key)
 
@@ -33,7 +33,7 @@ class ClusterState():
     def __init__(self, client):
         self.state = DotMap(client.cluster.state())
 
-    def get(self, key):
+    def get(self, key, name=None):
         """Return value for specific key"""
         # Remap the key to show master_node name, rather than nodeid
         if key == "master_node":
@@ -44,16 +44,9 @@ class ClusterState():
 class NodeStats():
     """NodeStats object"""
 
-    def __init__(self, client, name=None):
+    def __init__(self, client):
         self.nodeid = None
         self.rawstats = client.nodes.stats()
-        # Must provide node "name"
-        if not name:
-            logger.error('Node name not provided')
-            sys.exit(1)
-        else:
-            self.nodename = name
-            self.by_name()
 
     def by_name(self):
         for node in self.rawstats["nodes"]:
@@ -64,16 +57,8 @@ class NodeStats():
             sys.exit(1)
         self.stats = DotMap(self.rawstats["nodes"][self.nodeid])
 
-    def get(self, key):
+    def get(self, key, name=None):
         """Return value for specific key"""
-        return get_value(self.stats, key)
-
-class NodeInfo():
-    """NodeInfo object"""
-
-    def __init__(self, client, name=None):
-        self.nodeid = None
-        self.rawinfo = client.nodes.info()
         # Must provide node "name"
         if not name:
             logger.error('Node name not provided')
@@ -81,6 +66,14 @@ class NodeInfo():
         else:
             self.nodename = name
             self.by_name()
+        return get_value(self.stats, key)
+
+class NodeInfo():
+    """NodeInfo object"""
+
+    def __init__(self, client):
+        self.nodeid = None
+        self.rawinfo = client.nodes.info()
 
     def by_name(self):
         for node in self.rawinfo["nodes"]:
@@ -91,6 +84,13 @@ class NodeInfo():
             sys.exit(1)
         self.info = DotMap(self.rawinfo["nodes"][self.nodeid])
 
-    def get(self, key):
+    def get(self, key, name=None):
         """Return value for specific key"""
+        # Must provide node "name"
+        if not name:
+            logger.error('Node name not provided')
+            sys.exit(1)
+        else:
+            self.nodename = name
+            self.by_name()
         return get_value(self.info, key)
