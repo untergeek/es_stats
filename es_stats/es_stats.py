@@ -1,7 +1,9 @@
 import sys
 import elasticsearch
 from dotmap import DotMap
+from .exceptions import *
 from .utils import *
+import re
 import logging
 
 logger = logging.getLogger(__name__)
@@ -15,7 +17,7 @@ class ClusterHealth():
 
     def get(self, key, name=None):
         """Return value for specific key"""
-        return get_value(self.health, key)
+        return get_value(self.health, fix_key(key))
 
 class ClusterStats():
     """Cluster Stats Object"""
@@ -25,7 +27,7 @@ class ClusterStats():
 
     def get(self, key, name=None):
         """Return value for specific key"""
-        return get_value(self.stats, key)
+        return get_value(self.stats, fix_key(key))
 
 class ClusterState():
     """Cluster State Object"""
@@ -39,7 +41,7 @@ class ClusterState():
         if key == "master_node":
             nodeid = get_value(self.state, key)
             key = "nodes." + nodeid + ".name"
-        return get_value(self.state, key)
+        return get_value(self.state, fix_key(key))
 
 class NodeStats():
     """NodeStats object"""
@@ -53,20 +55,18 @@ class NodeStats():
             if self.rawstats["nodes"][node]["name"] == self.nodename:
                 self.nodeid = node
         if not self.nodeid:
-            logger.error('Node with name {0} not found.'.format(self.nodename))
-            sys.exit(1)
+            raise NotFound('Node with name {0} not found.'.format(self.nodename))
         self.stats = DotMap(self.rawstats["nodes"][self.nodeid])
 
     def get(self, key, name=None):
         """Return value for specific key"""
         # Must provide node "name"
         if not name:
-            logger.error('Node name not provided')
-            sys.exit(1)
+            raise MissingArgument('Node name not provided')
         else:
             self.nodename = name
             self.by_name()
-        return get_value(self.stats, key)
+        return get_value(self.stats, fix_key(key))
 
 class NodeInfo():
     """NodeInfo object"""
@@ -80,17 +80,15 @@ class NodeInfo():
             if self.rawinfo["nodes"][node]["name"] == self.nodename:
                 self.nodeid = node
         if not self.nodeid:
-            logger.error('Node with name {0} not found.'.format(self.nodename))
-            sys.exit(1)
+            raise NotFound('Node with name {0} not found.'.format(self.nodename))
         self.info = DotMap(self.rawinfo["nodes"][self.nodeid])
 
     def get(self, key, name=None):
         """Return value for specific key"""
         # Must provide node "name"
         if not name:
-            logger.error('Node name not provided')
-            sys.exit(1)
+            raise MissingArgument('Node name not provided')
         else:
             self.nodename = name
             self.by_name()
-        return get_value(self.info, key)
+        return get_value(self.info, fix_key(key))

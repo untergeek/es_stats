@@ -3,6 +3,24 @@
 Changelog
 =========
 
+=======
+0.2.0 (22 June 2016)
+--------------------
+
+**New**
+
+  * Switch to exception-based termination instead of ``sys.exit(#)``
+
+**Bug Fixes**
+
+  * The key "get" cannot appear normally in a DotMap without it being translated
+    as function "get."  This fix corrects this by way of a regex to use dict
+    notation for "get" only. Fixes #1 (untergeek)
+
+**General**
+
+  * Pruned incorrect docs from the as yet unfinished docs.
+
 0.1.0 (7 October 2015)
 ----------------------
 
