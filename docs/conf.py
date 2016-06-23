@@ -18,7 +18,7 @@ def fread(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 def get_version():
-    VERSIONFILE="../curator/_version.py"
+    VERSIONFILE="../es_stats/_version.py"
     verstrline = fread(VERSIONFILE).strip()
     vsre = r"^__version__ = ['\"]([^'\"]*)['\"]"
     mo = re.search(vsre, verstrline, re.M)
@@ -61,8 +61,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Elasticsearch Curator'
-copyright = u'2011-2015, Elasticsearch'
+project = u'es_stats'
+copyright = u'2015-2016, Aaron Mildenstein'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

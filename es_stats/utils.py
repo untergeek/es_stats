@@ -1,7 +1,12 @@
 from dotmap import DotMap
+import re
 import logging
 
 logger = logging.getLogger(__name__)
+
+def fix_key(key):
+    """Fix instances of ``.get.`` in key."""
+    return re.sub('\.get\.', '["get"].', key)
 
 def status_map(state):
     """Return a numeric value in place of the string value for state"""
