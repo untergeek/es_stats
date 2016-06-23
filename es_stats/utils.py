@@ -5,8 +5,8 @@ import logging
 logger = logging.getLogger(__name__)
 
 def fix_key(key):
-    """Fix instances of ``.get.`` in key."""
-    return re.sub('\.get\.', '["get"].', key)
+    """Convert dotted key to dict structure."""
+    return '[\'' + re.sub('\.', '\'][\'', key) + '\']'
 
 def status_map(state):
     """Return a numeric value in place of the string value for state"""
@@ -23,6 +23,6 @@ def status_map(state):
 
 def get_value(dotted, notation):
     """
-    Return value from DotMap dictionary, accessed by dotted notation
+    Return value from DotMap dictionary, accessed by dotted or dict notation
     """
-    return eval("dotted." + notation)
+    return eval("dotted" + notation)

@@ -3,7 +3,15 @@
 Changelog
 =========
 
-=======
+0.2.1 (22 June 2016)
+--------------------
+
+**Bug Fixes**
+
+  * Not only can the key "key" not appear in a DotMap, dashes in a key are also
+    bad.  The ``fix_key()`` method corrects this by translating all dotted
+    notation keys into dict notation.
+
 0.2.0 (22 June 2016)
 --------------------
 
