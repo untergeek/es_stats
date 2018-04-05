@@ -4,7 +4,7 @@ es_stats
 License
 -------
 
-Copyright 2015–2016 Aaron Mildenstein <http://untergeek.com> and contributors.
+Copyright 2015–2018 Aaron Mildenstein <http://untergeek.com> and contributors.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -3,6 +3,31 @@
 Changelog
 =========
 
+1.0.0 (4 April 2018)
+
+**New**
+
+  * Redundant code removed by making classes children of a parent class,
+    ``Stats``.
+  * Caching of stats calls.  Configurable with ``cache_frequency`` kwarg in
+    class initialization.  This should make repeated calls to crowded APIs
+    like NodeStats much faster, without hammering the cluster.  Default value
+    is 60 seconds.
+  * Improved linting helped clean things up.  Removed many unnecessary import
+    statements.
+  * Added ``quicktest.py`` which should test against a local, unencrypted node.
+
+**Breaking**
+
+  * Cluster health used to be mapped in this module from green/yellow/red to
+    0/1/2, respectively.  This is no longer done here.  It will respond with
+    ``green``, ``yellow``, and ``red`` as the API does.  For those of you who
+    are Zabbix users, the ``es_stats_zabbix`` module will handle the change, as
+    it should be mapped on that end.
+
+Changelog
+=========
+
 0.2.1 (22 June 2016)
 --------------------
 
@@ -21,9 +46,9 @@ Changelog
 
 **Bug Fixes**
 
-  * The key "get" cannot appear normally in a DotMap without it being translated
-    as function "get."  This fix corrects this by way of a regex to use dict
-    notation for "get" only. Fixes #1 (untergeek)
+  * The key "get" cannot appear normally in a DotMap without it being
+    translated as function "get."  This fix corrects this by way of a regex to
+    use dict notation for "get" only. Fixes #1 (untergeek)
 
 **General**
 
@@ -43,12 +68,13 @@ Changelog
 
 **New**
 
-  * Have ClusterState master_node calls return the node name, rather than the nodeid
+  * Have ClusterState master_node calls return the node name, rather than the
+    nodeid
 
 **Bug Fixes**
 
-  * Found out why Elasticsearch-py 1.7.0 was buggy.  It doesn't affect this module at all.
-    Fixed dependencies to allow 1.7.0 to be used.
+  * Found out why Elasticsearch-py 1.7.0 was buggy.  It doesn't affect this
+    module at all. Fixed dependencies to allow 1.7.0 to be used.
 
 0.0.3 (6 October 2015)
 ----------------------
