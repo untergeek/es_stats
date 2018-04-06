@@ -26,8 +26,6 @@ Changelog
     are Zabbix users, the ``es_stats_zabbix`` module will handle the change, as
     it should be mapped on that end.
 
-Changelog
-=========
 
 0.2.1 (22 June 2016)
 --------------------
