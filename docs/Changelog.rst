@@ -3,6 +3,13 @@
 Changelog
 =========
 
+1.0.1 (6 April 2018)
+--------------------
+
+**Bug Fixes**
+
+  * Fix incorrect version in ``_version.py`` for PyPI release
+
 1.0.0 (4 April 2018)
 --------------------
 
