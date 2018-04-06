@@ -1,12 +1,8 @@
-from dotmap import DotMap
-import re
-import logging
-
-logger = logging.getLogger(__name__)
+from re import sub
 
 def fix_key(key):
     """Convert dotted key to dict structure."""
-    return '[\'' + re.sub('\.', '\'][\'', key) + '\']'
+    return '[\'' + sub(r'\.', '\'][\'', key) + '\']'
 
 def status_map(state):
     """Return a numeric value in place of the string value for state"""
@@ -14,8 +10,6 @@ def status_map(state):
         return 0
     elif state == 'yellow':
         return 1
-    elif state == 'red':
-        return 2
     elif state == 'red':
         return 2
     else:
