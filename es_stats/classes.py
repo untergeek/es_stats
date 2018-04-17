@@ -12,10 +12,10 @@ class Stats():
         self.client = client
         self.cache = {}
         self.cache_frequency = cache_frequency
-        # Just take the first nodeid to initialize
-        nodesdump = self.cached_read('nodestats')['nodes']
-        self.nodeid = list(nodesdump.keys())[0]
-        self.nodename = nodesdump[self.nodeid]['name']
+        # Get the _local nodeid to initialize
+        localinfo = self.client.nodes.info(node_id='_local')['nodes']
+        self.nodeid = list(localinfo.keys())[0]
+        self.nodename = localinfo[self.nodeid]['name']
         self.logger.debug('Initialized nodeid = {0}'.format(self.nodeid))
         self.logger.debug('Initialized nodename = {0}'.format(self.nodename))
 
