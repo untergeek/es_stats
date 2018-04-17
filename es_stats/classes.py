@@ -14,8 +14,11 @@ class Stats():
         self.cache_frequency = cache_frequency
         # Get the _local nodeid to initialize
         localinfo = self.client.nodes.info(node_id='_local')['nodes']
-        self.nodeid = list(localinfo.keys())[0]
-        self.nodename = localinfo[self.nodeid]['name']
+        self.local_id = list(localinfo.keys())[0]
+        self.local_name = localinfo[self.local_id]['name']
+        # Assign copies for these to initialize
+        self.nodeid = self.local_id[:]
+        self.nodename = self.local_name[:]
         self.logger.debug('Initialized nodeid = {0}'.format(self.nodeid))
         self.logger.debug('Initialized nodename = {0}'.format(self.nodename))
 
@@ -44,8 +47,8 @@ class Stats():
         return self.cache[kind]['lastvalue']
 
     def find_name(self):
-        # The idea here is to recheck for the node 'name' after
-        # the other child class has re-assigned ``self.nodename``
+        # The idea here is to recheck for the node 'name' if a child class has
+        # manually assigned a node name to ``self.nodename``
         nodestats = self.cached_read('nodestats')['nodes']
         found = False
         for node in nodestats:
@@ -61,10 +64,13 @@ class Stats():
 
     def get(self, key, name=None):
         """Return value for specific key"""
-        if name is not None:
+        if name is None:
+            self.nodename = self.local_name
+            self.nodeid = self.local_id
+        else:
             self.logger.debug('Replacing nodename "{0}" with "{1}"'.format(self.nodename, name))
             self.nodename = name
-        self.find_name()
+            self.find_name()
         return get_value(self.stats(), fix_key(key))
 
     def stats(self):
