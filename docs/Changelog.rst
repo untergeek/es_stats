@@ -3,6 +3,14 @@
 Changelog
 =========
 
+1.1.1 (17 April 2018)
+---------------------
+
+**Bug Fixes**
+
+  * Refactor how the instance attributes ``nodeid`` and ``nodename`` are
+    initialized, and treated when/if a node name is passed to a child class.
+
 1.1.0 (17 April 2018)
 ---------------------
 
