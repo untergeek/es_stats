@@ -3,6 +3,16 @@
 Changelog
 =========
 
+1.1.0 (17 April 2018)
+---------------------
+
+**New**
+
+  * Update to only get the `_local` node information at initialization time and
+    set the instance attributes ``nodeid`` and ``nodename`` from the `_local`
+    node.  The previous behavior was to just take the first in the list.
+  * Allow any ``elasticsearch-py`` version >= 5.5.2
+
 1.0.1 (6 April 2018)
 --------------------
 
