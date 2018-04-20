@@ -7,11 +7,11 @@ from es_stats.utils import fix_key, get_value, status_map
 class Stats():
     """Stats Parent Class"""
 
-    def __init__(self, client, cache_frequency=60):
+    def __init__(self, client, cache_timeout=60):
         self.logger = logging.getLogger(__name__)
         self.client = client
         self.cache = {}
-        self.cache_frequency = cache_frequency
+        self.cache_timeout = cache_timeout
         # Get the _local nodeid to initialize
         localinfo = self.client.nodes.info(node_id='_local')['nodes']
         self.local_id = list(localinfo.keys())[0]
@@ -42,7 +42,7 @@ class Stats():
         """Cache stats calls to prevent hammering the API"""
         if not kind in self.cache:
             self.pull_stats(kind)
-        if self.epochnow() - self.cache[kind]['lastcall'] > self.cache_frequency:
+        if self.epochnow() - self.cache[kind]['lastcall'] > self.cache_timeout:
             self.pull_stats(kind)
         return self.cache[kind]['lastvalue']
 

@@ -3,6 +3,15 @@
 Changelog
 =========
 
+1.1.2 (20 April 2018)
+---------------------
+
+**Changes**
+
+  * Renamed ``cache_frequency`` to ``cache_timeout`` as `frequency` didn't
+    make as much sense.
+  * Renamed ``_version.py`` to ``version.py`` for project consistency's sake.
+
 1.1.1 (17 April 2018)
 ---------------------
 
