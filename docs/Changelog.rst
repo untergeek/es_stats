@@ -3,6 +3,14 @@
 Changelog
 =========
 
+1.2.0 (18 June 2018)
+
+**Changes**
+
+  * Add ``nodeid`` as a keyword arg to the ``stats`` method of each child
+    class.  This allows the stats of any arbitrary nodeid to be pulled.
+  * Put the classes in ``__init__.py`` to allow them to be more easily reached.
+
 1.1.2 (20 April 2018)
 ---------------------
 

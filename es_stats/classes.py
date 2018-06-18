@@ -83,17 +83,16 @@ class Stats():
 class ClusterHealth(Stats):
     """Cluster Health Child Class"""
 
-    def stats(self):
+    def stats(self, nodeid=None):
         # health = DotMap(self.cached_read('health'))
         # # Remap to numerical output for Zabbix.
         # health.status = status_map(health['status'])
         # return health
         return DotMap(self.cached_read('health'))
 
-
 class ClusterState(Stats):
 
-    def stats(self):
+    def stats(self, nodeid=None):
         cs = DotMap(self.cached_read('clusterstate'))
         master = cs['master_node']
         cs['master_node'] = self.cached_read('nodestats')['nodes'][master]['name']
@@ -101,17 +100,19 @@ class ClusterState(Stats):
 
 class ClusterStats(Stats):
 
-    def stats(self):
+    def stats(self, nodeid=None):
         return DotMap(self.cached_read('clusterstats'))
 
 class NodeInfo(Stats):
 
-    def stats(self):
-        return DotMap(self.cached_read('nodeinfo')['nodes'][self.nodeid])
+    def stats(self, nodeid=None):
+        nid = nodeid if nodeid else self.nodeid
+        return DotMap(self.cached_read('nodeinfo')['nodes'][nid])
 
 class NodeStats(Stats):
 
-    def stats(self):
-        return DotMap(self.cached_read('nodestats')['nodes'][self.nodeid])
+    def stats(self, nodeid=None):
+        nid = nodeid if nodeid else self.nodeid
+        return DotMap(self.cached_read('nodestats')['nodes'][nid])
 
  
